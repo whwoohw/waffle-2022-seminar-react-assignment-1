@@ -1,0 +1,16 @@
+.item-container { 
+    display: flex;
+    flex-direction: row;
+}
+
+.item {
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.selected {
+    background-color: #FFE4D2;
+}
