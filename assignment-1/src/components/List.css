@@ -114,6 +114,10 @@
     border-bottom: 1px solid black;
 }
 
+.menu-list:hover {
+    background-color: #FFE4D2;
+}
+
 .menu-detail {
     display: flex;
     flex: 1;
@@ -132,9 +136,5 @@
 }
 
 .selected {
-    background-color: #FFE4D2;
-}
-
-.onmouse { 
     background-color: #FFE4D2;
 }

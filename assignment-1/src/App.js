@@ -32,18 +32,17 @@ function App() {
     }
   ])
 
-
-  const [menunum, setMenunum] = useState(4); // 메뉴 개수 설정을 통한 id 부여
-  const [modalstate, setModalstate] = useState(0); // modalstate 0 : 아무것도 없음, 1: 추가버튼, 2: 수정버튼 3: 삭제버튼
-  const [detailstate, setDetailstate] = useState(false); // detailstate를 통해 detail이 보여지는지 여부 설정
-  const [selectedmenu, setSelectedmenu] = useState(""); // 메뉴 선택시 선택된 메뉴 selectedmenu로 저장
+  const [menuNum, setMenuNum] = useState(4); // 메뉴 개수 설정을 통한 id 부여
+  const [modalState, setModalState] = useState(0); // modalState 0 : 아무것도 없음, 1: 추가버튼, 2: 수정버튼 3: 삭제버튼
+  const [detailState, setDetailState] = useState(false); // detailState를 통해 detail이 보여지는지 여부 설정
+  const [selectedMenu, setSelectedMenu] = useState(""); // 메뉴 선택시 선택된 메뉴 selectedMenu로 저장
 
 
   return (
     <div className="app">
       <Header />
-      <List menus={menus} setModalstate={setModalstate} detailstate={detailstate} setDetailstate={setDetailstate} selectedmenu={selectedmenu} setSelectedmenu={setSelectedmenu}/>
-      <Modal menus={menus} setMenus={setMenus} modalstate={modalstate} setModalstate={setModalstate} menunum={menunum} setMenunum={setMenunum} setDetailstate={setDetailstate} selectedmenu={selectedmenu} setSelectedmenu={setSelectedmenu} />
+      <List menus={menus} setModalState={setModalState} detailState={detailState} setDetailState={setDetailState} selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu}/>
+      <Modal menus={menus} setMenus={setMenus} modalState={modalState} setModalState={setModalState} menuNum={menuNum} setMenuNum={setMenuNum} setDetailState={setDetailState} selectedMenu={selectedMenu} setSelectedMenu={setSelectedMenu} />
     </div>
   );
 }

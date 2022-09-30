@@ -4,13 +4,13 @@ import "./Modal.css";
 const Modal = ({
   menus,
   setMenus,
-  modalstate,
-  setModalstate,
-  menunum,
-  setMenunum,
-  setDetailstate,
-  selectedmenu,
-  setSelectedmenu,
+  modalState,
+  setModalState,
+  menuNum,
+  setMenuNum,
+  setDetailState,
+  selectedMenu,
+  setSelectedMenu,
 }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -20,10 +20,11 @@ const Modal = ({
   const [editimage, setEditimage] = useState("");
 
   useEffect(() => {
-    setEditname(selectedmenu.name);
-    setEditprice(selectedmenu.price);
-    setEditimage(selectedmenu.image);
-  }, [selectedmenu]);
+    setEditname(selectedMenu.name);
+    setEditprice(selectedMenu.price);
+    setEditimage(selectedMenu.image);
+  }, [selectedMenu]);
+
   const waffleName = (e) => {
     setName(e.target.value);
   };
@@ -53,8 +54,7 @@ const Modal = ({
   };
 
   const addMenu = () => {
-    let duplicate;
-    menus.forEach((menu) => (menu.name === name ? (duplicate = true) : null));
+    const duplicate = menus.map((menu) => menu.name).includes(editname);
     if (duplicate === true) {
       //각종 조건들에 대한 alert 설정
       alert("중복된 이름입니다!");
@@ -68,19 +68,19 @@ const Modal = ({
     } else if (Number(price.replaceAll(",", "")) % 10 !== 0) {
       alert("가격은 10원 단위로 끊어져야 합니다!");
     } else {
-      const newnum = menunum + 1;
+      const newnum = menuNum + 1;
       const addedlist = {
         id: newnum,
         name: name,
         price: Number(price.replaceAll(",", "")),
         image: image,
       };
-      setMenunum(newnum);
+      setMenuNum(newnum);
       const newlist = [...menus, addedlist];
       setMenus(newlist);
-      setSelectedmenu(addedlist);
-      setDetailstate(true);
-      setModalstate(0);
+      setSelectedMenu(addedlist);
+      setDetailState(true);
+      setModalState(0);
       setName("");
       setPrice("");
       setImage("");
@@ -88,7 +88,13 @@ const Modal = ({
   };
 
   const cancelModal = () => {
-    setModalstate(0);
+    setModalState(0);
+    setName("");
+    setPrice("");
+    setImage("");
+    setEditname("");
+    setEditprice("");
+    setEditimage("");
   };
 
   const editMenu = () => {
@@ -96,7 +102,7 @@ const Modal = ({
     menus.forEach((menu) =>
       menu.name === editname ? (duplicate = true) : null
     );
-    if (duplicate === true && editname !== selectedmenu.name) {
+    if (duplicate === true && editname !== selectedMenu.name) {
       alert("중복된 이름입니다!");
     } else if (editname.length > 20 || editname === "") {
       alert("이름은 1~20글자여야 합니다!");
@@ -108,35 +114,34 @@ const Modal = ({
     } else if (Number(editprice.replaceAll(",", "")) % 10 !== 0) {
       alert("가격은 10원 단위로 끊어져야 합니다!");
     } else {
-      setModalstate(0);
+      setModalState(0);
       const editlist = {
-        id: selectedmenu.id,
+        id: selectedMenu.id,
         name: editname,
         price: Number(editprice.replaceAll(",", "")),
         image: editimage,
       };
-      const index = menus.findIndex((elem) => elem.id === selectedmenu.id);
-      const clone = menus.slice();
-      clone.splice(index, 1, editlist);
-      setMenus(clone);
-      setSelectedmenu("");
-      setDetailstate(false);
+      setMenus(
+        menus.map((elem) => (elem.id === editlist.id ? editlist : elem))
+      );
+      setSelectedMenu("");
+      setDetailState(false);
     }
   };
 
   const deleteMenu = () => {
-    setModalstate(0);
-    const index = menus.findIndex((elem) => elem.id === selectedmenu.id);
+    setModalState(0);
+    const index = menus.findIndex((elem) => elem.id === selectedMenu.id);
     const clone = menus.slice();
     clone.splice(index, 1);
     setMenus(clone);
-    setSelectedmenu("");
-    setDetailstate(false);
+    setSelectedMenu("");
+    setDetailState(false);
   };
 
   return (
     <>
-      {modalstate === 0 ? null : modalstate === 1 ? (
+      {modalState === 0 ? null : modalState === 1 ? (
         <div className="add-modal-container">
           <div className="add-modal">
             <h3 className="modal-name">메뉴 추가</h3>
@@ -178,7 +183,7 @@ const Modal = ({
             </div>
           </div>
         </div>
-      ) : modalstate === 2 ? (
+      ) : modalState === 2 ? (
         <div>
           <div className="add-modal-container">
             <div className="add-modal">
