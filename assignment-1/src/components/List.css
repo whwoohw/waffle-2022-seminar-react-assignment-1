@@ -1,0 +1,140 @@
+.body-container {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+}
+
+.detailed {
+    width: 70%;
+}
+
+.search-bar {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.search-info {
+    width: 75px;
+    height: 20px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    display: flex;
+    align-items: center;
+    width: 413px;
+    height: 34px;
+    border: 1px solid #8A8A8A;
+    border-radius: 5px;
+}
+
+.menu-list-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid black;
+    overflow-y: auto;
+}
+
+.list-info-container {
+    height: 50px;
+    border-bottom: 1px solid black;
+    margin-right: 10px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.list-info {
+    height: 18px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+}
+
+.id {
+    width: 30px;
+    left: 40px;
+}
+
+.name {
+    width: 350px;
+    left: 70px;
+}
+
+.price {
+    left: 100px;
+}
+
+.menu-lists {
+    padding:0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 43px;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.menu-detail {
+    display: flex;
+    flex: 1;
+}
+
+.add-button {
+    width: 45px;
+    height: 45px;
+    position: fixed;
+    left: 92%;
+    top: 90%;
+}
+
+.button-detailed {
+    left: 62%;
+}
+
+.selected {
+    background-color: #FFE4D2;
+}
+
+.onmouse { 
+    background-color: #FFE4D2;
+}

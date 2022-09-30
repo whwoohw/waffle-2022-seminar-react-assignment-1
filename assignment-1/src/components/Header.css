@@ -1,0 +1,19 @@
+.waffle-logo {
+    width: 60px;
+    height: 60px;
+}
+
+.waffle-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    text-decoration: none;
+    color: black;
+    
+}
+
+.header {
+    border-bottom: 1px solid black;
+    margin-bottom: 30px;
+}
