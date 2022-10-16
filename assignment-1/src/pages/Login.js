@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSessionContext } from "../context/SessionContext";
+import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,24 +18,31 @@ const Login = () => {
     navigate(-1);
   };
   return (
-    <div>
-      <h3>로그인</h3>
-      <div>
-        <div>
-          <p>ID</p>
-          <input
-            onChange={getUsername}
-            value={username}
-            placeholder="블루베리스무디"
-          />
+    <div className="login-container">
+      <div className="login">
+        <h2>로그인</h2>
+        <div className="login-body">
+          <div className="inputs-container">
+            <div className="input-container">
+              <p className="input-info">ID</p>
+              <input
+                className="input-content"
+                onChange={getUsername}
+                value={username}
+                placeholder="블루베리스무디"
+              />
+            </div>
+            <div className="input-container">
+              <p className="input-info">PASSWORD</p>
+              <input className="input-content" placeholder="블루베리스무디" />
+            </div>
+          </div>
+          <div className="login-button-container">
+            <button className="login-button" onClick={getLoggedIn}>
+              로그인
+            </button>
+          </div>
         </div>
-        <div>
-          <p>PASSWORD</p>
-          <input placeholder="블루베리스무디" />
-        </div>
-      </div>
-      <div>
-        <button onClick={getLoggedIn}>로그인</button>
       </div>
     </div>
   );
