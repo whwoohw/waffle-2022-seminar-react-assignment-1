@@ -18,7 +18,7 @@
 .detailed {
   width: 60%;
 }
-
+/* 
 .search-bar {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -46,7 +46,7 @@
   height: 34px;
   border: 1px solid #8a8a8a;
   border-radius: 5px;
-}
+} */
 
 .menu-list-container {
   display: flex;

@@ -10,10 +10,6 @@
   background-color: rgba(0, 0, 0, 0.4);
   justify-content: center;
   align-items: center;
-  animation-duration: 0.25s;
-  animation-timing-function: ease-out;
-  animation-name: fadeIn;
-  animation-fill-mode: forwards;
 }
 
 .modal-name {
@@ -42,36 +38,6 @@
   padding-left: 40px;
 }
 
-.category {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.category-name {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-}
-
-.category-input {
-  position: absolute;
-  left: 200px;
-  width: 238px;
-  height: 30px;
-  border: 1px solid #8a8a8a;
-  border-radius: 5px;
-}
-
-.price-unit {
-  position: absolute;
-  left: 420px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 15px;
-}
-
 .modal-buttons {
   margin-top: 20px;
 }
@@ -88,11 +54,6 @@
   border-radius: 5px;
 }
 
-.add {
-  left: 340px;
-  background-color: #d3ffc3;
-}
-
 .delete {
   left: 340px;
   background-color: #ffcfcf;
@@ -101,13 +62,4 @@
 .cancel {
   left: 400px;
   background-color: white;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }

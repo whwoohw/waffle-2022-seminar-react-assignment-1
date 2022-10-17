@@ -4,13 +4,22 @@ import { useSessionContext } from "../context/SessionContext";
 import "./DetailedMenu.css";
 import arrow from "../img/arrow.PNG";
 import Modal from "../components/Modal";
+import ErrorPage from "./ErrorPage";
 
-const DetailedMenu = ({ modalstate, setModalstate }) => {
+const DetailedMenu = ({ modalState, setModalState }) => {
   const params = useParams();
   const { menus } = useMenuDataContext();
   const { login } = useSessionContext();
   const menu = menus.find((elem) => elem.id === Number(params.menuId));
   const navigate = useNavigate();
+
+  // 잘못 입력시 에러페이지로 연결
+  if (
+    !/\d+/.test(params.menuId) ||
+    menus.filter((menu) => menu.id === Number(params.menuId)).length === 0
+  ) {
+    return <ErrorPage />;
+  }
 
   return (
     <>
@@ -46,7 +55,7 @@ const DetailedMenu = ({ modalstate, setModalstate }) => {
                       <span className="material-symbols-outlined">edit</span>
                     </div>
                   </Link>
-                  <div className="icon-image" onClick={() => setModalstate(1)}>
+                  <div className="icon-image" onClick={() => setModalState(1)}>
                     <span className="material-symbols-outlined">delete</span>
                   </div>
                 </div>
@@ -60,8 +69,8 @@ const DetailedMenu = ({ modalstate, setModalstate }) => {
       </div>
       <Modal
         menu={menu}
-        modalstate={modalstate}
-        setModalstate={setModalstate}
+        modalState={modalState}
+        setModalState={setModalState}
       />
     </>
   );

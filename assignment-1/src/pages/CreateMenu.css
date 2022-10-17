@@ -1,4 +1,4 @@
-.add-modal-container {
+.create-page-container {
   position: absolute;
   top: 0px;
   bottom: 0px;
@@ -12,11 +12,11 @@
   align-items: center;
 }
 
-.modal-name {
+.create-page-name {
   margin-bottom: 20px;
 }
 
-.add-modal {
+.create-page {
   display: flex;
   flex-direction: column;
   width: 800px;
@@ -28,20 +28,20 @@
   overflow-y: scroll;
 }
 
-.category {
+.create-box {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
 }
 
-.category-name {
+.create-box-name {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
 }
 
-.category-input {
+.create-box-input {
   width: 750px;
   height: 30px;
   border: 1px solid #8a8a8a;
@@ -58,7 +58,7 @@
   position: relative;
 }
 
-.price-unit {
+.box-price-unit {
   position: absolute;
   right: 40px;
   bottom: -6px;
@@ -68,14 +68,14 @@
   font-size: 15px;
 }
 
-.modal-buttons {
+.create-page-buttons {
   margin-top: 30px;
   display: flex;
   flex-direction: row;
   column-gap: 20px;
 }
 
-.modal-button {
+.create-page-button {
   width: 45px;
   height: 30px;
   font-family: "Inter";

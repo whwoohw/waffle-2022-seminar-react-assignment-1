@@ -1,7 +1,16 @@
+import { useNavigate } from "react-router-dom";
+import { useMenuDataContext } from "../context/MenuDataContext";
 import "./Modal.css";
 
-const Modal = ({ modalState, setModalstate }) => {
-  const deleteMenu = () => {};
+const Modal = ({ menu, modalState, setModalState }) => {
+  const navigate = useNavigate();
+  const { deleteMenus } = useMenuDataContext();
+
+  const deleteMenu = () => {
+    deleteMenus(menu.id);
+    setModalState(0);
+    navigate("/stores/1");
+  };
 
   return (
     <>
@@ -18,7 +27,7 @@ const Modal = ({ modalState, setModalstate }) => {
               </button>
               <button
                 className="modal-button cancel"
-                onClick={() => setModalstate(0)}
+                onClick={() => setModalState(0)}
               >
                 취소
               </button>

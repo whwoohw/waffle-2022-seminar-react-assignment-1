@@ -16,35 +16,6 @@
   width: 100%;
 }
 
-.search-bar {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  column-gap: 10px;
-}
-
-.search-info {
-  width: 75px;
-  height: 20px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-}
-
-.search-input {
-  display: flex;
-  align-items: center;
-  width: 413px;
-  height: 34px;
-  border: 1px solid #8a8a8a;
-  border-radius: 5px;
-}
-
 .store-list-container {
   display: flex;
   flex-direction: column;

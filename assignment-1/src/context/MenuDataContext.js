@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useState } from "react";
 
+//초기값 설정
 const initialState = {
   menus: [
     {
@@ -38,7 +39,6 @@ const initialState = {
     },
   ],
   menuNum: 4,
-  addMenuNum: () => null,
   addMenus: () => null,
   editMenus: () => null,
   deleteMenus: () => null,
@@ -83,28 +83,25 @@ export function MenuDataProvider({ children }) {
       description: "",
     },
   ]);
-  const [menuNum, setMenuNum] = useState(5);
-  const addMenus = useCallback(
-    (menu) => setMenus((menus) => [...menus, menu]),
-    []
-  );
-  const addMenuNum = useCallback(
-    () => setMenuNum((menuNum) => menuNum + 1),
-    []
-  );
-  const editMenus = useCallback(
-    (editlist) =>
-      setMenus((menus) =>
-        menus.map((menu) => (menu.id === editlist.id ? editlist : menu))
-      ),
-    []
-  );
+  const [menuNum, setMenuNum] = useState(4);
 
+  //메뉴 생성 함수
+  const addMenus = useCallback((menu) => {
+    setMenus((e) => [...e, menu]);
+    setMenuNum((i) => i + 1);
+  }, []);
+
+  //메뉴 수정 함수
+
+  const editMenus = useCallback((editlist) => {
+    setMenus((k) =>
+      k.map((menu) => (menu.id === editlist.id ? editlist : menu))
+    );
+  }, []);
+
+  //메뉴 삭제 함수
   const deleteMenus = useCallback(
-    (menuId) =>
-      setMenus((menus) =>
-        menus.map((menu) => (menu.id === menuId ? null : menu))
-      ),
+    (menuId) => setMenus((menus) => menus.filter((menu) => menu.id !== menuId)),
     []
   );
   return (
@@ -115,7 +112,6 @@ export function MenuDataProvider({ children }) {
         addMenus,
         editMenus,
         deleteMenus,
-        addMenuNum,
       }}
     >
       {children}

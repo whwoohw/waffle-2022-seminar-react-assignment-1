@@ -5,10 +5,12 @@ import MenuDetail from "./MenuDetail";
 import { useState } from "react";
 import SearchBar from "./SearchBar";
 import { useMenuDataContext } from "../context/MenuDataContext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSessionContext } from "../context/SessionContext";
+import ErrorPage from "../pages/ErrorPage";
 
 const List = ({ setModalState, selectedMenu, setSelectedMenu }) => {
+  const params = useParams();
   const { menus } = useMenuDataContext();
   const { login } = useSessionContext();
 
@@ -19,6 +21,12 @@ const List = ({ setModalState, selectedMenu, setSelectedMenu }) => {
     setDetailState(true);
     setSelectedMenu(menu);
   };
+
+
+  // 잘못 입력시 에러페이지로 연결
+  if (!/\d+/.test(params.storeId)) {
+    return <ErrorPage />;
+  }
 
   return (
     <>

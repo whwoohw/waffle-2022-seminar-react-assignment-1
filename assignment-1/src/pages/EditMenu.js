@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMenuDataContext } from "../context/MenuDataContext";
+import { useSessionContext } from "../context/SessionContext";
 import "./EditMenu.css";
+import ErrorPage from "./ErrorPage";
 
 const EditMenu = () => {
+  const { login } = useSessionContext();
   const navigate = useNavigate();
   const params = useParams();
   const { menus, editMenus } = useMenuDataContext();
@@ -40,23 +43,33 @@ const EditMenu = () => {
       navigate(-1);
     }
   };
+
+  // 잘못 입력시 에러 페이지로 연결
+  if (
+    !/\d+/.test(params.menuId) ||
+    menus.filter((menu) => menu.id === Number(params.menuId)).length === 0 ||
+    login !== true
+  ) {
+    return <ErrorPage />;
+  }
+
   return (
-    <div className="add-modal-container">
-      <div className="add-modal">
-        <h1 className="modal-name">새 메뉴 추가</h1>
-        <div className="category-fixed">
-          <p className="category-name">이름</p>
+    <div className="edit-page-container">
+      <div className="edit-page">
+        <h1 className="edit-name">새 메뉴 추가</h1>
+        <div className="edit-box-fixed">
+          <p className="edit-box-name">이름</p>
           <p>{menu.name}</p>
         </div>
-        <div className="category-fixed">
-          <p className="category-name">종류</p>
+        <div className="edit-box-fixed">
+          <p className="edit-box-name">종류</p>
           <p>{menu.type}</p>
         </div>
-        <div className="category">
-          <p className="category-name">가격</p>
+        <div className="edit-box">
+          <p className="edit-box-name">가격</p>
           <div className="input-container">
             <input
-              className="category-input"
+              className="edit-box-input"
               placeholder="5,000"
               value={price}
               onChange={wafflePrice}
@@ -64,30 +77,30 @@ const EditMenu = () => {
             <p className="price-unit">원</p>
           </div>
         </div>
-        <div className="category">
-          <p className="category-name">상품 이미지</p>
+        <div className="edit-box">
+          <p className="edit-box-name">상품 이미지</p>
           <input
-            className="category-input"
+            className="edit-box-input"
             placeholder="https://foo.bar/baz.png"
             value={image}
             onChange={(e) => setImage(e.target.value)}
           />
         </div>
-        <div className="category">
-          <p className="category-name">설명</p>
+        <div className="edit-box">
+          <p className="edit-box-name">설명</p>
           <textarea
-            className="category-input textarea"
+            className="edit-box-input textarea"
             placeholder="상품에 대한 자세한 설명을 입력해주세요"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
       </div>
-      <div className="modal-buttons">
-        <button className="modal-button add" onClick={editMenu}>
+      <div className="edit-buttons">
+        <button className="edit-button add" onClick={editMenu}>
           저장
         </button>
-        <button className="modal-button cancel" onClick={() => navigate(-1)}>
+        <button className="edit-button cancel" onClick={() => navigate(-1)}>
           취소
         </button>
       </div>

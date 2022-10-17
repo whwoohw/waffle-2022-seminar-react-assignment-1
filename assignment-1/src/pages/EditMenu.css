@@ -1,4 +1,4 @@
-.add-modal-container {
+.edit-page-container {
   position: absolute;
   top: 0px;
   bottom: 0px;
@@ -12,11 +12,11 @@
   align-items: center;
 }
 
-.modal-name {
+.edit-name {
   margin-bottom: 20px;
 }
 
-.add-modal {
+.edit-page {
   display: flex;
   flex-direction: column;
   width: 800px;
@@ -28,27 +28,27 @@
   overflow-y: scroll;
 }
 
-.category-fixed {
+.edit-box-fixed {
   display: flex;
   flex-direction: row;
   align-items: center;
   column-gap: 150px;
 }
 
-.category {
+.edit-box {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
 }
 
-.category-name {
+.edit-box-name {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
 }
 
-.category-input {
+.edit-box-input {
   width: 750px;
   height: 30px;
   border: 1px solid #8a8a8a;
@@ -75,14 +75,14 @@
   font-size: 15px;
 }
 
-.modal-buttons {
+.edit-buttons {
   margin-top: 30px;
   display: flex;
   flex-direction: row;
   column-gap: 20px;
 }
 
-.modal-button {
+.edit-button {
   width: 45px;
   height: 30px;
   font-family: "Inter";
