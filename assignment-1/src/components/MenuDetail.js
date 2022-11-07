@@ -6,12 +6,19 @@ const MenuDetail = ({
   setDetailState,
   selectedMenu,
   setSelectedMenu,
-  setModalState,
 }) => {
   const closedetail = () => {
     setDetailState(false);
     setSelectedMenu("");
   };
+  let selectedMenuRating;
+  if (selectedMenu.rating) {
+    selectedMenuRating = selectedMenu.rating;
+  } else {
+    selectedMenuRating = 0;
+  }
+
+  console.log(selectedMenuRating);
 
   return (
     <>
@@ -38,6 +45,25 @@ const MenuDetail = ({
             </p>
             <p>{selectedMenu.price.toLocaleString()} 원</p>
             <p>{selectedMenu.description}</p>
+            <div className="star-ratings">
+              <div
+                className="star-ratings-fill space-x-2 text-lg"
+                style={{ width: selectedMenuRating * 10 + "%" }}
+              >
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+              </div>
+              <div className="star-ratings-base space-x-2 text-lg">
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+              </div>
+            </div>
             <div className="detail-icons">
               <Link to={`/menus/${selectedMenu.id}`}>
                 <button className="detail-button">자세히</button>

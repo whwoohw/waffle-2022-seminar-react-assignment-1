@@ -2,14 +2,14 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAccessTokenContext } from "../context/AccessTokenContext";
 import { useSessionContext } from "../context/SessionContext";
 import wafflelogo from "../img/wafflelogo.PNG";
-import "./Header.css";
+import "./StoreHeader.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const Header = () => {
-  const navigate = useNavigate();
+const StoreHeader = ({ storeName, ownerName }) => {
   const { login, id, storeId, changeLoginState } = useSessionContext();
   const { accessToken, deleteAccessToken } = useAccessTokenContext();
+  const navigate = useNavigate();
   const getLoggedOut = async () => {
     try {
       const res = await axios.post(
@@ -32,8 +32,7 @@ const Header = () => {
       Swal.fire("로그아웃 에러!!");
     }
   };
-
-  const goMyStore = () => {
+  const goToMyStore = () => {
     navigate(`/stores/${storeId}`);
   };
 
@@ -43,14 +42,22 @@ const Header = () => {
         <div className="header-link">
           <Link to="/" className="waffle-link">
             <img src={wafflelogo} alt="waffle-logo" className="waffle-logo" />
-            <h3>와플스튜디오 메뉴관리</h3>
+            <div className="header-with-store">
+              <p style={{ margin: 0 }}>와플스튜디오 메뉴관리</p>
+              <div className="storename-and-ownername">
+                <h1 style={{ margin: 0 }}>{storeName}</h1>
+                <p style={{ color: "grey", fontSize: "20px", margin: 0 }}>
+                  by {ownerName}
+                </p>
+              </div>
+            </div>
           </Link>
         </div>
         <div className="header-button">
           {login ? (
             <div className="user-info">
               <p>{id}님 안녕하세요!</p>
-              <button className="my-store-button" onClick={goMyStore}>
+              <button className="my-store-button" onClick={goToMyStore}>
                 내 가게
               </button>
               <button className="logout-button" onClick={() => getLoggedOut()}>
@@ -73,4 +80,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default StoreHeader;
