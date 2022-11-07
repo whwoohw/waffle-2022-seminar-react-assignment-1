@@ -1,19 +1,59 @@
 .waffle-logo {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
 }
 
 .waffle-link {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    column-gap: 10px;
-    text-decoration: none;
-    color: black;
-    
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 10px;
+  text-decoration: none;
+  color: black;
 }
 
 .header {
-    border-bottom: 1px solid black;
-    margin-bottom: 30px;
+  border-bottom: 1px solid black;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.login-button-header {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 70px;
+  height: 30px;
+}
+
+.my-store-button {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 70px;
+  height: 30px;
+}
+
+.logout-button {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 70px;
+  height: 30px;
 }

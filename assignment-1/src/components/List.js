@@ -3,51 +3,40 @@ import addbutton from "../img/addbutton.PNG";
 import "./List.css";
 import MenuDetail from "./MenuDetail";
 import { useState } from "react";
+import SearchBar from "./SearchBar";
+import { useMenuDataContext } from "../context/MenuDataContext";
+import { Link, useParams } from "react-router-dom";
+import { useSessionContext } from "../context/SessionContext";
+import ErrorPage from "../pages/ErrorPage";
 
-const List = ({
-  menus,
-  setModalstate,
-  selectedmenu,
-  setSelectedmenu,
-  detailstate,
-  setDetailstate,
-}) => {
-  const [q, setQ] = useState("");
-  const [onmouse, setOnmouse] = useState("");
+const List = ({ setModalState, selectedMenu, setSelectedMenu }) => {
+  const params = useParams();
+  const { menus } = useMenuDataContext();
+  const { login } = useSessionContext();
 
-  const getModal = () => {
-    setModalstate(1);
-  };
+  const [menuSearch, setMenuSearch] = useState("");
+  const [detailState, setDetailState] = useState(false);
 
   const getMenudetail = (menu) => {
-    setDetailstate(true);
-    setSelectedmenu(menu);
+    setDetailState(true);
+    setSelectedMenu(menu);
   };
 
-  const onmouseMenu = (menu) => { // 커서 올릴시 메뉴에 새로운 className 부여
-    setOnmouse(menu);
-  };
 
-  const leavemouseMenu = () => {
-    setOnmouse("");
-  };
-
-  const changeQ = (e) => {
-    setQ(e.target.value);
-  };
+  // 잘못 입력시 에러페이지로 연결
+  if (!/\d+/.test(params.storeId)) {
+    return <ErrorPage />;
+  }
 
   return (
     <>
       <div className="body-container">
-        <div className={"body" + (detailstate === true ? " detailed" : "")}>
-          <div className="search-bar">
-            <div className="search-info">이름 검색 :</div>
-            <input
-              placeholder="검색어 입력"
-              className="search-input"
-              onChange={changeQ}
-            />
-          </div>
+        <div className={"body" + (detailState === true ? " detailed" : "")}>
+          <SearchBar
+            search={menuSearch}
+            setSearch={setMenuSearch}
+            searchType="메뉴"
+          />
           <div className="menu-list-container">
             <div className="list-info-container">
               <div className="list-info id">ID</div>
@@ -56,49 +45,49 @@ const List = ({
             </div>
             <ul className="menu-lists">
               {menus
-                .filter((menu) => menu.name.includes(q))
+                .filter((menu) => menu.name.includes(menuSearch))
                 .map((menu) => (
                   <li
                     key={menu.id}
                     className={
-                      "menu-list" +
-                      (menu === selectedmenu
-                        ? " selected"
-                        : menu === onmouse
-                        ? " onmouse"
-                        : "")
+                      "menu-list" + (menu === selectedMenu ? " selected" : "")
                     }
                     onClick={() => {
                       getMenudetail(menu);
-                    }}
-                    onMouseEnter={() => {
-                      onmouseMenu(menu);
-                    }}
-                    onMouseLeave={() => {
-                      leavemouseMenu();
                     }}
                   >
                     <Item menu={menu} />
                   </li>
                 ))}
             </ul>
-            <img
-              src={addbutton}
-              alt="addbutton"
-              className={
-                "add-button" + (detailstate === true ? " button-detailed" : "")
-              }
-              onClick={getModal}
-            />
+            {login ? (
+              <button
+                className={
+                  "add-button" +
+                  (detailState === true ? " button-detailed" : "")
+                }
+              >
+                <Link to="/menus/new">
+                  <img
+                    className={
+                      "add-button" +
+                      (detailState === true ? " button-detailed" : "")
+                    }
+                    src={addbutton}
+                    alt="addbutton"
+                  />
+                </Link>
+              </button>
+            ) : null}
           </div>
         </div>
         <div className="menu-detail">
           <MenuDetail
-            detailstate={detailstate}
-            setDetailstate={setDetailstate}
-            selectedmenu={selectedmenu}
-            setSelectedmenu={setSelectedmenu}
-            setModalstate={setModalstate}
+            detailState={detailState}
+            setDetailState={setDetailState}
+            selectedMenu={selectedMenu}
+            setSelectedMenu={setSelectedMenu}
+            setModalState={setModalState}
           />
         </div>
       </div>

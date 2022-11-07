@@ -1,37 +1,47 @@
 .menu-detail-container {
-    width: 100%;
-    height: 100%;
-    border: 1px solid black;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .detail-close-button {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    margin-left: 90%;
-    margin-top: 5%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  margin-left: 90%;
+  margin-top: 5%;
 }
 
 .detail-contents {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .detail-url {
-    width: 210px;
-    height: 200px;
-    border-radius: 20px;
-    margin-bottom: 25px;
+  width: 210px;
+  height: 200px;
+  border-radius: 20px;
+  margin-bottom: 25px;
 }
 
 .detail-icons {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: row;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+.detail-button {
+  width: 70px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 15px;
+  font-weight: 300;
 }
