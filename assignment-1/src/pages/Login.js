@@ -24,14 +24,21 @@ const Login = () => {
   const getLoggedIn = async () => {
     try {
       const res = await axios.post(
-        "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/auth/login",
+        process.env.NODE_ENV === "development"
+          ? "/auth/login"
+          : "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/auth/login",
         { username: username, password: password }
       );
-      const res2 = await axios.get("/owners/me", {
-        headers: {
-          authorization: `Bearer ${res.data.access_token}`,
-        },
-      });
+      const res2 = await axios.get(
+        process.env.NODE_ENV === "development"
+          ? "/owners/me"
+          : "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/owners/me",
+        {
+          headers: {
+            authorization: `Bearer ${res.data.access_token}`,
+          },
+        }
+      );
       getAccessToken(res.data.access_token);
       getId(username);
       getStoreId(res2.data.owner.id);

@@ -43,7 +43,9 @@ const CreateMenu = () => {
     } else {
       try {
         const res2 = await axios.post(
-          "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/",
+          process.env.NODE_ENV === "development"
+            ? "/menus/"
+            : "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/",
           {
             name: name,
             type: type,
@@ -76,7 +78,9 @@ const CreateMenu = () => {
     const getMenus = async () => {
       try {
         const res = await axios.get(
-          "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/"
+          process.env.NODE_ENV === "development"
+            ? "/menus/"
+            : "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/"
         );
         setMenus(res.data.data);
       } catch (error) {

@@ -10,7 +10,9 @@ const ReviewModal = ({ review, modalState, setModalState }) => {
   const deleteReview = async () => {
     try {
       const res = await axios.delete(
-        `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/reviews/${review.id}`,
+        process.env.NODE_ENV === "development"
+          ? `/reviews/${review.id}`
+          : `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/reviews/${review.id}`,
         {
           headers: {
             authorization: `Bearer ${accessToken}`,

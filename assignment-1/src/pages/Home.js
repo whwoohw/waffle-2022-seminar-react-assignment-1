@@ -11,13 +11,14 @@ const Home = () => {
   const [searchedStores, setSearchedStores] = useState();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  let timer;
 
   const fetchStoresData = async () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/owners/"
+        process.env.NODE_ENV === "development"
+          ? "/owners/"
+          : "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/owners/"
       );
       setStores(res.data);
     } catch (error) {
@@ -27,9 +28,11 @@ const Home = () => {
     setLoading(false);
   };
 
+  let timer;
   const searchStoreByName = () => {
     if (!timer) {
       //throttling 1초로 설정
+      console.log("a");
       timer = setTimeout(async () => {
         timer = null;
         if (storeSearch) {
@@ -37,7 +40,9 @@ const Home = () => {
             setLoading(true);
 
             const res = await axios.get(
-              "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/owners/",
+              process.env.NODE_ENV === "development"
+                ? "/owners/"
+                : "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/owners/",
               {
                 params: {
                   name: storeSearch,
@@ -55,7 +60,8 @@ const Home = () => {
           fetchStoresData();
           setSearchedStores();
         }
-      }, 1000);
+      }, 500);
+      console.log("b");
     }
   };
 

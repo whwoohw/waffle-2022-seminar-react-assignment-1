@@ -11,26 +11,27 @@ const Header = () => {
   const { login, id, storeId, changeLoginState } = useSessionContext();
   const { accessToken, deleteAccessToken } = useAccessTokenContext();
   const getLoggedOut = async () => {
-    try {
-      const res = await axios.post(
+    axios
+      .post(
         process.env.NODE_ENV === "development"
           ? "/auth/logout"
           : "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/auth/logout",
         null,
         {
+          withCredentials: true,
           headers: {
             authorization: `Bearer ${accessToken}`,
           },
-          withCredentials: true,
         }
-      );
-      console.log(res);
-      deleteAccessToken();
-      changeLoginState();
-    } catch (error) {
-      console.log(error);
-      Swal.fire("로그아웃 에러!!");
-    }
+      )
+      .then((response) => {
+        console.log(response);
+        deleteAccessToken();
+        changeLoginState();
+      })
+      .catch((error) => {
+        Swal.fire("로그아웃 오류!");
+      });
   };
 
   const goMyStore = () => {

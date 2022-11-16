@@ -18,8 +18,6 @@ const MenuDetail = ({
     selectedMenuRating = 0;
   }
 
-  console.log(selectedMenuRating);
-
   return (
     <>
       {detailState === false ? null : (

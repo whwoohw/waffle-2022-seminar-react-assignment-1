@@ -11,7 +11,9 @@ const Modal = ({ menu, modalState, setModalState }) => {
   const deleteMenu = async () => {
     try {
       const res = await axios.delete(
-        `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/${menu.id}`,
+        process.env.NODE_ENV === "development"
+          ? `/menus/${menu.id}`
+          : `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/${menu.id}`,
         {
           headers: {
             authorization: `Bearer ${accessToken}`,
