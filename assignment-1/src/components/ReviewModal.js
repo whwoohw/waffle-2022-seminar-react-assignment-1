@@ -1,17 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import "./Modal.css";
-import axios from "axios";
 import Swal from "sweetalert2";
+import "./ReviewModal.css";
+import axios from "axios";
 import { useAccessTokenContext } from "../context/AccessTokenContext";
 
-const Modal = ({ menu, modalState, setModalState }) => {
+const ReviewModal = ({ review, modalState, setModalState }) => {
   const navigate = useNavigate();
   const { accessToken } = useAccessTokenContext();
-
-  const deleteMenu = async () => {
+  const deleteReview = async () => {
     try {
       const res = await axios.delete(
-        `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/${menu.id}`,
+        `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/reviews/${review.id}`,
         {
           headers: {
             authorization: `Bearer ${accessToken}`,
@@ -21,7 +20,7 @@ const Modal = ({ menu, modalState, setModalState }) => {
       );
       console.log(res);
       setModalState(0);
-      navigate(`/stores/${menu.owner.id}`);
+      navigate(`/menus/${review.menu.id}`);
     } catch (error) {
       console.log(error);
       Swal.fire("리뷰 삭제 에러!!");
@@ -30,15 +29,15 @@ const Modal = ({ menu, modalState, setModalState }) => {
 
   return (
     <>
-      {modalState === 1 ? (
+      {modalState === 2 ? (
         <div className="add-modal-container">
           <div className="delete-modal">
-            <h3 className="modal-name">메뉴 삭제</h3>
+            <h3 className="modal-name">리뷰 삭제</h3>
             <div className="category">
               <p className="delete-info">정말로 삭제하시겠습니까?</p>
             </div>
             <div className="modal-buttons">
-              <button className="modal-button delete" onClick={deleteMenu}>
+              <button className="modal-button delete" onClick={deleteReview}>
                 삭제
               </button>
               <button
@@ -55,4 +54,4 @@ const Modal = ({ menu, modalState, setModalState }) => {
   );
 };
 
-export default Modal;
+export default ReviewModal;
