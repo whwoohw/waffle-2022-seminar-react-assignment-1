@@ -38,7 +38,9 @@ const List = () => {
             setLoading(true);
 
             const res = await axios.get(
-              "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/",
+              process.env.NODE_ENV === "development"
+                ? "/menus/"
+                : "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/",
               {
                 params: {
                   search: menuSearch,
@@ -65,7 +67,9 @@ const List = () => {
     const getMenus = async () => {
       try {
         const res = await axios.get(
-          "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/",
+          process.env.NODE_ENV === "development"
+            ? "/menus/"
+            : "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/",
           {
             params: {
               owner: params.storeId,
@@ -84,7 +88,9 @@ const List = () => {
     const getStore = async () => {
       try {
         const res = await axios.get(
-          `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/owners/${params.storeId}`
+          process.env.NODE_ENV === "development"
+            ? `/owners/${params.storeId}`
+            : `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/owners/${params.storeId}`
         );
         setStore(res.data.owner);
       } catch (error) {

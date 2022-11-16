@@ -36,7 +36,9 @@ const EditMenu = () => {
     } else {
       try {
         const res2 = await axios.patch(
-          `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/${menu.id}`,
+          process.env.NODE_ENV === "development"
+            ? `/menus/${menu.id}`
+            : `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/${menu.id}`,
           {
             price: Number(price.replaceAll(",", "")),
             image: image,
@@ -66,7 +68,9 @@ const EditMenu = () => {
     const getMenu = async () => {
       try {
         const res = await axios.get(
-          `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/${params.menuId}`
+          process.env.NODE_ENV === "development"
+            ? `/menus/${params.menuId}`
+            : `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/${params.menuId}`
         );
         setMenu(res.data);
       } catch (error) {
