@@ -1,6 +1,7 @@
 import "./SearchBar.css";
+import { FaSearch } from "react-icons/fa";
 
-const SearchBar = ({ search, setSearch, searchType }) => {
+const SearchBar = ({ search, setSearch, searchType, searchFunction }) => {
   return (
     <div className="search-bar">
       <div className="search-info">{searchType} 검색 :</div>
@@ -10,6 +11,9 @@ const SearchBar = ({ search, setSearch, searchType }) => {
         onChange={(e) => setSearch(e.target.value)}
         value={search}
       />
+      <div onClick={searchFunction}>
+        <FaSearch />
+      </div>
     </div>
   );
 };
