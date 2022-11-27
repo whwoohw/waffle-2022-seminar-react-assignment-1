@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useSessionContext } from "../context/SessionContext";
@@ -8,20 +8,24 @@ import axios from "axios";
 import { useAccessTokenContext } from "../context/AccessTokenContext";
 // import StoreHeader from "../components/StoreHeader";
 
+type Menu = {
+  name: string;
+};
+
 const CreateMenu = () => {
   const navigate = useNavigate();
   const { login } = useSessionContext();
 
-  const [menus, setMenus] = useState();
-  const [name, setName] = useState("");
-  const [type, setType] = useState("default");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
-  const [description, setDescription] = useState("");
+  const [menus, setMenus] = useState<Menu[]>([]);
+  const [name, setName] = useState<string>("");
+  const [type, setType] = useState<string>("default");
+  const [price, setPrice] = useState<string>("");
+  const [image, setImage] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const { accessToken } = useAccessTokenContext();
   // const [store, setStore] = useState();
 
-  const wafflePrice = (e) => {
+  const wafflePrice = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const removedCommaValue = Number(value.replaceAll(",", ""));
     setPrice(removedCommaValue.toLocaleString());
@@ -30,16 +34,16 @@ const CreateMenu = () => {
   const addMenu = async () => {
     const duplicate = menus.map((menu) => menu.name).includes(name);
     if (duplicate === true) {
-      Swal("중복된 이름입니다!");
+      Swal.fire("중복된 이름입니다!");
     } else if (name.length > 20 || name === "") {
-      Swal("이름은 1~20글자여야 합니다!");
+      Swal.fire("이름은 1~20글자여야 합니다!");
     } else if (
       Number(price.replaceAll(",", "")) > 1000000 ||
       Number(price.replaceAll(",", "")) < 100
     ) {
-      Swal("가격은 100 ~ 1000000 사이여야 합니다!");
+      Swal.fire("가격은 100 ~ 1000000 사이여야 합니다!");
     } else if (Number(price.replaceAll(",", "")) % 10 !== 0) {
-      Swal("가격은 10원 단위로 끊어져야 합니다!");
+      Swal.fire("가격은 10원 단위로 끊어져야 합니다!");
     } else {
       try {
         const res2 = await axios.post(

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSessionContext } from "../context/SessionContext";
-import "./EditMenu.css";
+import styles from "./EditMenu.module.css";
 import ErrorPage from "./ErrorPage";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -11,15 +11,14 @@ const EditMenu = () => {
   const { login } = useSessionContext();
   const navigate = useNavigate();
   const params = useParams();
-  const [menu, setMenu] = useState();
+  const [menu, setMenu] = useState<any>();
   // const menu = menus.find((elem) => elem.id === Number(params.menuId));
-
+  const [loading, setLoading] = useState(false);
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const { accessToken } = useAccessTokenContext();
-
-  const wafflePrice = (e) => {
+  const wafflePrice = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const removedCommaValue = Number(value.replaceAll(",", ""));
     setPrice(removedCommaValue.toLocaleString());
@@ -67,12 +66,14 @@ const EditMenu = () => {
   useEffect(() => {
     const getMenu = async () => {
       try {
+        setLoading(true);
         const res = await axios.get(
           process.env.NODE_ENV === "development"
             ? `/menus/${params.menuId}`
             : `https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/menus/${params.menuId}`
         );
         setMenu(res.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
         Swal.fire("메뉴 불러오기 에러!!");
@@ -88,66 +89,70 @@ const EditMenu = () => {
       setDescription(menu.description);
     }
   }, [menu]);
+  console.log(menu);
 
   // 잘못 입력시 에러 페이지로 연결
   if (login !== true) {
     return <ErrorPage />;
   }
 
-  return (
-    menu && (
-      <div className="edit-page-container">
-        <div className="edit-page">
-          <h1 className="edit-name">메뉴 수정</h1>
-          <div className="edit-box-fixed">
-            <p className="edit-box-name">이름</p>
-            <p>{menu.name}</p>
-          </div>
-          <div className="edit-box-fixed">
-            <p className="edit-box-name">종류</p>
-            <p>{menu.type}</p>
-          </div>
-          <div className="edit-box">
-            <p className="edit-box-name">가격</p>
-            <div className="input-container">
-              <input
-                className="edit-box-input"
-                placeholder="5,000"
-                value={price}
-                onChange={wafflePrice}
-              />
-              <p className="price-unit">원</p>
-            </div>
-          </div>
-          <div className="edit-box">
-            <p className="edit-box-name">상품 이미지</p>
+  return loading || !menu ? (
+    <div>로딩 중...</div>
+  ) : (
+    <div className={styles["edit-page-container"]}>
+      <div className={styles["edit-page"]}>
+        <h1 className={styles["edit-name"]}>메뉴 수정</h1>
+        <div className={styles["edit-box-fixed"]}>
+          <p className={styles["edit-box-name"]}>이름</p>
+          <p>{menu.name}</p>
+        </div>
+        <div className={styles["edit-box-fixed"]}>
+          <p className={styles["edit-box-name"]}>종류</p>
+          <p>{menu.type}</p>
+        </div>
+        <div className={styles["edit-box"]}>
+          <p className={styles["edit-box-name"]}>가격</p>
+          <div className={styles["input-container"]}>
             <input
-              className="edit-box-input"
-              placeholder="https://foo.bar/baz.png"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              className={styles["edit-box-input"]}
+              placeholder="5,000"
+              value={price}
+              onChange={wafflePrice}
             />
-          </div>
-          <div className="edit-box">
-            <p className="edit-box-name">설명</p>
-            <textarea
-              className="edit-box-input textarea"
-              placeholder="상품에 대한 자세한 설명을 입력해주세요"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
+            <p className={styles["price-unit"]}>원</p>
           </div>
         </div>
-        <div className="edit-buttons">
-          <button className="edit-button add" onClick={editMenu}>
-            저장
-          </button>
-          <button className="edit-button cancel" onClick={() => navigate(-1)}>
-            취소
-          </button>
+        <div className={styles["edit-box"]}>
+          <p className={styles["edit-box-name"]}>상품 이미지</p>
+          <input
+            className={styles["edit-box-input"]}
+            placeholder="https://foo.bar/baz.png"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+        </div>
+        <div className={styles["edit-box"]}>
+          <p className={styles["edit-box-name"]}>설명</p>
+          <textarea
+            className={styles["edit-box-input textarea"]}
+            placeholder="상품에 대한 자세한 설명을 입력해주세요"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
         </div>
       </div>
-    )
+      <div className={styles["edit-buttons"]}>
+        <button className={styles["edit-button-add"]} onClick={editMenu}>
+          저장
+        </button>
+        <button
+          className={styles["edit-button-cancel"]}
+          onClick={() => navigate(-1)}
+        >
+          취소
+        </button>
+      </div>
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSessionContext } from "../context/SessionContext";
-import "./Login.css";
+import styles from "./Login.module.css";
 import axios from "axios";
 import { useAccessTokenContext } from "../context/AccessTokenContext";
 import Swal from "sweetalert2"; //sweetalert2 사용
@@ -17,7 +17,7 @@ const Login = () => {
   });
 
   const { username, password } = formData;
-  const changeForm = (e) => {
+  const changeForm = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -51,25 +51,25 @@ const Login = () => {
   };
   return (
     <>
-      <div className="login-container">
-        <div className="login">
+      <div className={styles["login-container"]}>
+        <div className={styles["login"]}>
           <h2>로그인</h2>
-          <div className="login-body">
-            <div className="inputs-container">
-              <div className="input-container">
-                <p className="input-info">ID</p>
+          <div className={styles["login-body"]}>
+            <div className={styles["inputs-container"]}>
+              <div className={styles["input-container"]}>
+                <p className={styles["input-info"]}>ID</p>
                 <input
-                  className="input-content"
+                  className={styles["input-content"]}
                   name="username"
                   onChange={changeForm}
                   value={username}
                   placeholder="블루베리스무디"
                 />
               </div>
-              <div className="input-container">
-                <p className="input-info">PASSWORD</p>
+              <div className={styles["input-container"]}>
+                <p className={styles["input-info"]}>PASSWORD</p>
                 <input
-                  className="input-content"
+                  className={styles["input-content"]}
                   name="password"
                   onChange={changeForm}
                   value={password}
@@ -77,8 +77,8 @@ const Login = () => {
                 />
               </div>
             </div>
-            <div className="login-button-container">
-              <button className="login-button" onClick={getLoggedIn}>
+            <div className={styles["login-button-container"]}>
+              <button className={styles["login-button"]} onClick={getLoggedIn}>
                 로그인
               </button>
             </div>

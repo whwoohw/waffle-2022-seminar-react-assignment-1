@@ -6,7 +6,7 @@ const MenuDetail = ({
   setDetailState,
   selectedMenu,
   setSelectedMenu,
-}) => {
+}: any) => {
   const closedetail = () => {
     setDetailState(false);
     setSelectedMenu("");

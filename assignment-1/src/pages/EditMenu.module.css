@@ -55,7 +55,7 @@
   border-radius: 5px;
 }
 
-.textarea {
+.edit-box-input textarea {
   height: 80px;
 }
 
@@ -67,7 +67,7 @@
 
 .price-unit {
   position: absolute;
-  right: 40px;
+  right: 60px;
   bottom: -6px;
   font-family: "Inter";
   font-style: normal;
@@ -93,12 +93,28 @@
   border-radius: 5px;
 }
 
-.add {
+.edit-button-add {
+  width: 45px;
+  height: 30px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  border: 1px solid #8a8a8a;
+  border-radius: 5px;
   left: 340px;
   background-color: #d3ffc3;
 }
 
-.cancel {
+.edit-button-cancel {
+  width: 45px;
+  height: 30px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  border: 1px solid #8a8a8a;
+  border-radius: 5px;
   left: 400px;
   background-color: white;
 }

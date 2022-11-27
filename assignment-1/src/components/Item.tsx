@@ -1,6 +1,6 @@
 import "./Item.css";
 
-const Item = ({ menu }) => {
+const Item = ({ menu }: any) => {
   let rating;
   if (menu.rating) {
     rating = menu.rating;

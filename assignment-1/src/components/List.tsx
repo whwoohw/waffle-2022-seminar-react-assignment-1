@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import { Link, useParams } from "react-router-dom";
 import { useSessionContext } from "../context/SessionContext";
-import ErrorPage from "../pages/ErrorPage";
 import axios from "axios";
 import Swal from "sweetalert2";
 import StoreHeader from "./StoreHeader";
@@ -17,16 +16,16 @@ const List = () => {
   const { login } = useSessionContext();
 
   const [menuSearch, setMenuSearch] = useState("");
-  const [searchedMenus, setSearchedMenus] = useState();
+  const [searchedMenus, setSearchedMenus] = useState<any>();
   const [detailState, setDetailState] = useState(false);
-  const [menus, setMenus] = useState();
+  const [menus, setMenus] = useState<any>();
   const [loading, setLoading] = useState(false);
-  const [store, setStore] = useState();
-  const getMenudetail = (menu) => {
+  const [store, setStore] = useState<any>();
+  const getMenudetail = (menu: any) => {
     setDetailState(true);
     setSelectedMenu(menu);
   };
-  let timer;
+  let timer: any;
 
   const searchMenuByName = () => {
     if (!timer) {
@@ -56,7 +55,7 @@ const List = () => {
           }
         } else {
           // 아무것도 입력 안하고 검색버튼 누르면 원래 화면으로 돌아옴
-          setSearchedMenus();
+          setSearchedMenus([]);
         }
       }, 1000);
     }
@@ -102,12 +101,12 @@ const List = () => {
   }, [params]);
 
   // 잘못 입력시 에러페이지로 연결
-  if (!/\d+/.test(params.storeId)) {
-    return <ErrorPage />;
-  }
+  // if (!/\d+/.test(params.storeId)) {
+  //   return <ErrorPage />;
+  // }
 
   return loading ? (
-    "로딩 중.."
+    <div>로딩 중..</div>
   ) : !menus || !store ? null : !searchedMenus ? (
     <>
       <StoreHeader storeName={store.store_name} ownerName={store.username} />
@@ -126,7 +125,7 @@ const List = () => {
               <div className="list-info price">가격</div>
             </div>
             <ul className="menu-lists">
-              {menus.map((menu) => (
+              {menus.map((menu: any) => (
                 <li
                   key={menu.id}
                   className={
@@ -189,7 +188,7 @@ const List = () => {
               <div className="list-info price">가격</div>
             </div>
             <ul className="menu-lists">
-              {searchedMenus.map((menu) => (
+              {searchedMenus.map((menu: any) => (
                 <li
                   key={menu.id}
                   className={
