@@ -66,11 +66,11 @@ const ReviewContainer = ({
 
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
-    if (inView) {
+    if (inView && !loading && reviews.length === count) {
       setCount((prevState: any) => prevState + 6);
       setReviews([]);
     }
-  }, [inView]);
+  }, [inView, loading, count, reviews]);
   return loading ? (
     <div>로딩 중...</div>
   ) : (
