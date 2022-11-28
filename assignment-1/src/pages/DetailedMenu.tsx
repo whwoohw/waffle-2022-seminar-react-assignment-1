@@ -107,7 +107,8 @@ const DetailedMenu = ({ modalState, setModalState }: any) => {
         );
         console.log(res);
         setClicked([false, false, false, false, false]);
-        setReviewContent(null);
+        setReviewContent("");
+        setEditReviewId(0);
         navigate(`/menus/${menu.id}`);
       } catch (error) {
         console.log(error);
