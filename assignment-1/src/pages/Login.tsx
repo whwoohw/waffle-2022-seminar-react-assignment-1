@@ -27,7 +27,8 @@ const Login = () => {
         process.env.NODE_ENV === "development"
           ? "/auth/login"
           : "https://ah9mefqs2f.execute-api.ap-northeast-2.amazonaws.com/auth/login",
-        { username: username, password: password }
+        { username: username, password: password },
+        { withCredentials: true }
       );
       const res2 = await axios.get(
         process.env.NODE_ENV === "development"

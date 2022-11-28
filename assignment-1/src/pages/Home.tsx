@@ -74,7 +74,7 @@ const Home = () => {
             <div className="star-ratings">
               <div
                 className="star-ratings-fill space-x-2 text-lg"
-                style={{ width: store.rating * 20 + "%" }}
+                style={{ width: store.rating * 10 + "%" }}
               >
                 <span>★</span>
                 <span>★</span>
